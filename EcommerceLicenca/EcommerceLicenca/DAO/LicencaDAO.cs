@@ -32,15 +32,8 @@ namespace EcommerceLicenca.DAO
             SqlParameter[] parametros = new SqlParameter[11];
             parametros[0] = new SqlParameter("id", model.Id);
             parametros[1] = new SqlParameter("nomelicenca", model.NomeLicenca);
-            parametros[2] = new SqlParameter("fornecedorid", model.FornecedorId);
-            parametros[3] = new SqlParameter("valormensal", model.ValorMensal);
-            parametros[4] = new SqlParameter("datainicio", model.DataInicio);
-            parametros[5] = new SqlParameter("datavalidade", model.DataValidade);
-            parametros[6] = new SqlParameter("versaolicenca", model.VersaoLicenca);
-            parametros[7] = new SqlParameter("tipolicenca", model.TipoLicenca);
-            parametros[8] = new SqlParameter("plataforma", model.Plataforma);
-            parametros[9] = new SqlParameter("requisitossistema", model.RequisitosSistema);
-            parametros[10] = new SqlParameter("funcionalidades", model.Funcionalidades);
+            parametros[2] = new SqlParameter("valor", model.Valor);
+            parametros[3] = new SqlParameter("requisitossistema", model.RequisitosSistema);
             return parametros;
         }
 
@@ -81,16 +74,8 @@ namespace EcommerceLicenca.DAO
             LicencaViewModel licenca = new LicencaViewModel();
             licenca.Id = Convert.ToInt32(registro["id"]);
             licenca.NomeLicenca = registro["nomelicenca"].ToString();
-            licenca.FornecedorId = Convert.ToInt32(registro["fornecedorid"]);
-            licenca.ValorMensal = Convert.ToDouble(registro["valormensal"]);
-            licenca.DataInicio = Convert.ToDateTime(registro["datainicio"]);
-            licenca.DataValidade = Convert.ToDateTime(registro["datavalidade"]);
-            licenca.VersaoLicenca = registro["versaolicenca"].ToString();
-            licenca.TipoLicenca = registro["tipolicenca"].ToString();
-            licenca.Plataforma = registro["plataforma"].ToString();
+            licenca.Valor= Convert.ToDouble(registro["valor"]);
             licenca.RequisitosSistema = registro["requisitossistema"].ToString();
-            licenca.Funcionalidades = registro["funcionalidades"].ToString();
-            licenca.ChaveAtivacao = registro["chaveativacao"].ToString();
             return licenca;
         }
 
