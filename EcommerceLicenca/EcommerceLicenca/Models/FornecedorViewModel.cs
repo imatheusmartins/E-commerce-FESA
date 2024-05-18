@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic; // Adicionei esta linha para corrigir o tipo List
 
-namespace N1.Models
+namespace EcommerceLicenca.Models
 {
-    public abstract class FornecedorViewModel : PadraoViewModel
+    public class FornecedorViewModel : PadraoViewModel
     {
         public string NomeFornecedor { get; set; } // Para armazenar o nome do fornecedor
         public List<LicencaViewModel> SoftwareDisponiveis { get; set; } // Corrigi o tipo List e o nome da propriedade

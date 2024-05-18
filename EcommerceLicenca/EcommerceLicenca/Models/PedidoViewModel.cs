@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace N1.Models
+namespace EcommerceLicenca.Models
 {
-    public abstract class PedidoViewModel : PadraoViewModel
+    public class PedidoViewModel : PadraoViewModel
     {
         public DateTime Data { get; set; }
     }

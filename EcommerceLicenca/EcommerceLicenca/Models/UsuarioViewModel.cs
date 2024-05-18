@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace N1.Models
+namespace EcommerceLicenca.Models
 {
 
     public class UsuarioViewModel : PadraoViewModel
     {
         public string NomeUsuario { get; set; } // Para armazenar o nome de usuário
-        private bool TipoUsuario { get; set;}
+        public bool TipoUsuario { get; set;}
         public string Cpf { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Sexo { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace N1.Models
+﻿namespace EcommerceLicenca.Models
 {
     public abstract class PadraoViewModel
     {

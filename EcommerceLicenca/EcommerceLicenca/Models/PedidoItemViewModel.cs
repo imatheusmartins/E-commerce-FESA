@@ -1,6 +1,6 @@
-﻿namespace N1.Models
+﻿namespace EcommerceLicenca.Models
 {
-    public abstract class PedidoItemViewModel : PadraoViewModel
+    public class PedidoItemViewModel : PadraoViewModel
     {
         public int PedidoId { get; set; }
         public int LicencaId { get; set; }

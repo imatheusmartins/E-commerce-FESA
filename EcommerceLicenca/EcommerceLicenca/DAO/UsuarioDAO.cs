@@ -1,12 +1,30 @@
-﻿using N1.Models;
+﻿using EcommerceLicenca.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace N1.DAO
+namespace EcommerceLicenca.DAO
 {
     public class UsuarioDAO : PadraoDAO<UsuarioViewModel>
     {
+        public void Inserir(UsuarioViewModel Usuario)
+        {
+            HelperDAO.ExecutaProc("spIncluiUsuario", CriaParametros(Usuario));
+        }
+        public void Alterar(UsuarioViewModel Usuario)
+        {
+            HelperDAO.ExecutaProc("spAlteraUsuario", CriaParametros(Usuario));
+        }
+        public void Excluir(int id)
+        {
+            var p = new SqlParameter[]
+            {
+                new SqlParameter("id", id)
+            };
+            HelperDAO.ExecutaProc("spExcluiUsuario", p);
+        }
+
         protected override SqlParameter[] CriaParametros(UsuarioViewModel model)
         {
             SqlParameter[] parametros = new SqlParameter[14];
@@ -23,8 +41,42 @@ namespace N1.DAO
             parametros[10] = new SqlParameter("email", model.Email);
             parametros[11] = new SqlParameter("senha", model.Senha);
             parametros[12] = new SqlParameter("dataregistro", model.DataRegistro);
+            parametros[13] = new SqlParameter("tipousuario", model.TipoUsuario);
             return parametros;
         }
+
+        public UsuarioViewModel Consulta(int id)
+        {
+            var p = new SqlParameter[]
+            {
+                new SqlParameter("id", id)
+            };
+            DataTable tabela = HelperDAO.ExecutaProcSelect("spConsultaUsuario", p);
+            if (tabela.Rows.Count == 0)
+                return null;
+            else
+                return MontaModel(tabela.Rows[0]);
+        }
+        public List<UsuarioViewModel> Listagem()
+        {
+            List<UsuarioViewModel> lista = new List<UsuarioViewModel>();
+
+            DataTable tabela = HelperDAO.ExecutaProcSelect("spListagemUsuarios", null);
+            
+        foreach (DataRow registro in tabela.Rows)
+                lista.Add(MontaModel(registro));
+            return lista;
+        }
+        public int ProximoId()
+        {
+            var p = new SqlParameter[]
+            {
+                new SqlParameter("tabela", "Usuarios")
+            };
+            DataTable tabela = HelperDAO.ExecutaProcSelect("spProximoId", p);
+            return Convert.ToInt32(tabela.Rows[0]["MAIOR"]);
+        }
+
 
         protected override UsuarioViewModel MontaModel(DataRow registro)
         {
@@ -41,6 +93,7 @@ namespace N1.DAO
             usuario.TelefoneCelular = registro["telefonecelular"].ToString();
             usuario.Email = registro["email"].ToString();
             usuario.Senha = registro["senha"].ToString();
+            usuario.TipoUsuario = (bool)registro["tipousuario"];
             usuario.DataRegistro = Convert.ToDateTime(registro["dataregistro"]);
             return usuario;
         }

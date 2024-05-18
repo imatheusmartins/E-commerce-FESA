@@ -1,6 +1,6 @@
-﻿namespace N1.Models
+﻿namespace EcommerceLicenca.Models
 {
-    public abstract class CarrinhoViewModel : PadraoViewModel
+    public class CarrinhoViewModel : PadraoViewModel
     {
         public int LicencaId { get; set; }
         public int Quantidade { get; set; }

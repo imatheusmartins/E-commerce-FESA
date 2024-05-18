@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace N1.DAO
+namespace EcommerceLicenca.DAO
 {
     public static class ConexaoBD
     {

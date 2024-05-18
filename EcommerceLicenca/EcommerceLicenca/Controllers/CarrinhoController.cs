@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using N1.Models;
+using EcommerceLicenca.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EcommerceLicenca.DAO;
 
-namespace N1.Controllers
+namespace EcommerceLicenca.Controllers
 {
     public class CarrinhoController : Controller
     {
@@ -15,13 +16,13 @@ namespace N1.Controllers
         {
             try
             {
-                CidadeDAO dao = new CidadeDAO();
-                var listaDeCidades = dao.Listagem();
+                LicencaDAO dao = new LicencaDAO();
+                var listaDeLicencas = dao.Listagem();
                 var carrinho = ObtemCarrinhoNaSession();
 
                 ViewBag.TotalCarrinho = carrinho.Sum(c => c.Quantidade);
 
-                return View(listaDeCidades);
+                return View(listaDeLicencas);
             }
             catch (Exception erro)
             {
@@ -29,26 +30,24 @@ namespace N1.Controllers
             }
         }
 
-        public IActionResult Detalhes(int idCidade)
+        public IActionResult Detalhes(int idLicenca)
         {
             try
             {
                 var carrinho = ObtemCarrinhoNaSession();
-                CidadeDAO cidDao = new CidadeDAO();
-                var modelCidade = cidDao.Consulta(idCidade);
-                var carrinhoModel = carrinho.FirstOrDefault(c => c.CidadeId == idCidade);
+                LicencaDAO licDao = new LicencaDAO();
+                var modelLicenca = licDao.Consulta(idLicenca);
+                var carrinhoModel = carrinho.FirstOrDefault(c => c.LicencaId == idLicenca);
 
                 if (carrinhoModel == null)
                 {
                     carrinhoModel = new CarrinhoViewModel
                     {
-                        CidadeId = idCidade,
-                        Nome = modelCidade.Nome,
+                        LicencaId = idLicenca,
+                        NomeLicenca = modelLicenca.NomeLicenca,
                         Quantidade = 0
                     };
                 }
-
-                carrinhoModel.ImagemEmBase64 = modelCidade.ImagemEmBase64;
 
                 return View(carrinhoModel);
             }
@@ -71,12 +70,12 @@ namespace N1.Controllers
             return carrinho;
         }
 
-        public IActionResult AdicionarCarrinho(int CidadeId, int Quantidade)
+        public IActionResult AdicionarCarrinho(int LicencaId, int Quantidade)
         {
             try
             {
                 var carrinho = ObtemCarrinhoNaSession();
-                var carrinhoModel = carrinho.FirstOrDefault(c => c.CidadeId == CidadeId);
+                var carrinhoModel = carrinho.FirstOrDefault(c => c.LicencaId == LicencaId);
 
                 if (carrinhoModel != null && Quantidade == 0)
                 {
@@ -86,12 +85,12 @@ namespace N1.Controllers
                 else if (carrinhoModel == null && Quantidade > 0)
                 {
                     // Adiciona ao carrinho
-                    CidadeDAO cidDao = new CidadeDAO();
-                    var modelCidade = cidDao.Consulta(CidadeId);
+                    LicencaDAO licDao = new LicencaDAO();
+                    var modelLicenca = licDao.Consulta(LicencaId);
                     carrinhoModel = new CarrinhoViewModel
                     {
-                        CidadeId = CidadeId,
-                        Nome = modelCidade.Nome
+                        LicencaId = LicencaId,
+                        NomeLicenca = modelLicenca.NomeLicenca
                     };
                     carrinho.Add(carrinhoModel);
                 }
@@ -116,13 +115,14 @@ namespace N1.Controllers
         {
             try
             {
-                CidadeDAO dao = new CidadeDAO();
+                LicencaDAO dao = new LicencaDAO();
                 var carrinho = ObtemCarrinhoNaSession();
 
                 foreach (var item in carrinho)
                 {
-                    var cid = dao.Consulta(item.CidadeId);
-                    item.ImagemEmBase64 = cid.ImagemEmBase64;
+                    var lic = dao.Consulta(item.LicencaId);
+                    // Adicione outras propriedades necessárias da licença ao item
+                    item.NomeLicenca = lic.NomeLicenca;
                 }
 
                 return View(carrinho);

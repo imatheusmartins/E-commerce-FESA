@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace N1.Models
+namespace EcommerceLicenca.Models
 {
 
     public class LicencaViewModel : PadraoViewModel

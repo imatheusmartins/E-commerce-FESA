@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using N1.Models;
+using EcommerceLicenca.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace N1.Controllers
+namespace EcommerceLicenca.Controllers
 {
     public class HomeController : Controller
     {

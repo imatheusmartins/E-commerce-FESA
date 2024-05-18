@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 
-namespace N1.Controllers
+namespace EcommerceLicenca.Controllers
 {
     public class HelperControllers
     {

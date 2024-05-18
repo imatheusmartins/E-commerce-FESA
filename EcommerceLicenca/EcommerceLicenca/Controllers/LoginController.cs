@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace N1.Controllers
+namespace EcommerceLicenca.Controllers
 {
     public class LoginController : Controller
     {

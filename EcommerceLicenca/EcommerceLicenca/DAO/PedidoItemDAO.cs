@@ -1,8 +1,9 @@
-﻿using N1.Models;
+﻿using EcommerceLicenca.Models;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace N1.DAO
+namespace EcommerceLicenca.DAO
 {
     public class PedidoItemDAO : PadraoDAO<PedidoItemViewModel>
     {

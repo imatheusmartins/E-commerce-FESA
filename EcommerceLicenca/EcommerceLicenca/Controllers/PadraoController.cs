@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using N1.Models;
+using EcommerceLicenca.Models;
 using System;
+using EcommerceLicenca.DAO;
 
-namespace N1.Controllers
+namespace EcommerceLicenca.Controllers
 {
     public class PadraoController<T> : Controller where T : PadraoViewModel
     {

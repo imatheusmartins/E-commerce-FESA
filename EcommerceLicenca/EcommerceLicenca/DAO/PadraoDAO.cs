@@ -1,13 +1,15 @@
-﻿using N1.Models;
+﻿using EcommerceLicenca.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace N1.DAO
+namespace EcommerceLicenca.DAO
 {
     public abstract class PadraoDAO<T> where T : PadraoViewModel
     {
+        protected bool ChaveIdentity { get; set; } = false;
+
         protected PadraoDAO()
         {
             SetTabela();
