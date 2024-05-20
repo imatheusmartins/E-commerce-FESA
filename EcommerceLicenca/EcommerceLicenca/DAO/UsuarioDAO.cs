@@ -39,6 +39,20 @@ namespace EcommerceLicenca.DAO
             return u;
         }
 
+        public virtual T ConsultaLogin(int id)
+        {
+            var p = new SqlParameter[]
+            {
+                new SqlParameter("id", id),
+                new SqlParameter("tabela", Tabela)
+            };
+            var tabela = HelperDAO.ExecutaProcSelect("spConsulta", p);
+            if (tabela.Rows.Count == 0)
+                return null;
+            else
+                return MontaModel(tabela.Rows[0]);
+        }
+
         protected override void SetTabela()
         {
             Tabela = "Usuario";

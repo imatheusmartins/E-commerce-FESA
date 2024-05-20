@@ -53,6 +53,9 @@ namespace EcommerceLicenca.DAO
             else
                 return MontaModel(tabela.Rows[0]);
         }
+
+        
+
         public virtual int ProximoId()
         {
             var p = new SqlParameter[]
