@@ -13,6 +13,11 @@ namespace EcommerceLicenca.Controllers
             else
                 return true;
         }
+
+        public static void LimparCarrinho(ISession session)
+        {
+            session.Remove("carrinho");
+        }
     }
 
 }

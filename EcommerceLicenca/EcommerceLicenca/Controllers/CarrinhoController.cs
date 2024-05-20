@@ -12,138 +12,149 @@ namespace EcommerceLicenca.Controllers
 {
     public class CarrinhoController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    try
-        //    {
-        //        LicencaDAO dao = new LicencaDAO();
-        //        var listaDeLicencas = dao.Listagem();
-        //        var carrinho = ObtemCarrinhoNaSession();
+        public IActionResult Index()
+        {
+            try
+            {
+                LicencaDAO dao = new LicencaDAO();
+                var listaDeLicencas = dao.Listagem();
+                var carrinho = ObtemCarrinhoNaSession();
+                //@ViewBag.TotalCarrinho = carrinho.Sum(c => c.Quantidade);
+                @ViewBag.TotalCarrinho = 0;
+                foreach (var c in carrinho)
+                    @ViewBag.TotalCarrinho += c.Quantidade;
+                return View(listaDeLicencas);
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel(erro.ToString()));
+            }
+        }
 
-        //        ViewBag.TotalCarrinho = carrinho.Sum(c => c.Quantidade);
+        public IActionResult Detalhes(int idLicenca)
+        {
+            try
+            {
+                List<CarrinhoViewModel> carrinho = ObtemCarrinhoNaSession();
+                LicencaDAO licDao = new LicencaDAO();
+                var modelLicenca = licDao.Consulta(idLicenca);
+                CarrinhoViewModel carrinhoModel = carrinho.Find(c => c.LicencaId == idLicenca);
+                if (carrinhoModel == null)
+                {
+                    carrinhoModel = new CarrinhoViewModel();
+                    carrinhoModel.LicencaId = idLicenca;
+                    carrinhoModel.NomeLicenca = modelLicenca.NomeLicenca;
+                    carrinhoModel.Quantidade = 0;
+                }
+                // preenche a imagem
+                //carrinhoModel.ImagemEmBase64 = modelCidade.ImagemEmBase64;
+                return View(carrinhoModel);
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel(erro.ToString()));
+            }
+        }
+        private List<CarrinhoViewModel> ObtemCarrinhoNaSession()
+        {
+            List<CarrinhoViewModel> carrinho = new List<CarrinhoViewModel>();
+            string carrinhoJson = HttpContext.Session.GetString("carrinho");
+            if (carrinhoJson != null)
+                carrinho = JsonConvert.DeserializeObject<List<CarrinhoViewModel>>(carrinhoJson);
+            return carrinho;
+        }
+        public IActionResult AdicionarCarrinho(int LicencaId, int Quantidade)
+        {
+            try
+            {
+                List<CarrinhoViewModel> carrinho = ObtemCarrinhoNaSession();
+                CarrinhoViewModel carrinhoModel = carrinho.Find(c => c.LicencaId == LicencaId);
+                if (carrinhoModel != null && Quantidade == 0)
+                {
+                    //tira do carrinho
+                    carrinho.Remove(carrinhoModel);
+                }
+                else if (carrinhoModel == null && Quantidade > 0)
+                {
+                    //não havia no carrinho, vamos adicionar
+                    LicencaDAO LicencaDao = new LicencaDAO();
+                    var modelCidade = LicencaDao.Consulta(LicencaId);
+                    carrinhoModel = new CarrinhoViewModel();
+                    carrinhoModel.LicencaId = LicencaId;
+                    carrinhoModel.NomeLicenca = modelCidade.NomeLicenca;
+                    carrinho.Add(carrinhoModel);
+                }
+                if (carrinhoModel != null)
+                    carrinhoModel.Quantidade = Quantidade;
+                string carrinhoJson = JsonConvert.SerializeObject(carrinho);
+                HttpContext.Session.SetString("carrinho", carrinhoJson);
+                return RedirectToAction("Index");
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel(erro.ToString()));
+            }
+        }
 
-        //        return View(listaDeLicencas);
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
+        public IActionResult Visualizar()
+        {
+            try
+            {
+                LicencaDAO dao = new LicencaDAO();
+                var carrinho = ObtemCarrinhoNaSession();
+                foreach (var item in carrinho)
+                {
+                    var lic = dao.Consulta(item.LicencaId);
+                    item.ImagemEmBase64 = lic.ImagemEmBase64;
+                }
+                return View(carrinho);
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel(erro.ToString()));
+            }
+        }
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (!HelperControllers.VerificaUserLogado(HttpContext.Session))
+                context.Result = RedirectToAction("Index", "Login");
+            else
+            {
+                ViewBag.Logado = true;
+                base.OnActionExecuting(context);
+            }
+        }
 
-        //public IActionResult Detalhes(int idLicenca)
-        //{
-        //    try
-        //    {
-        //        var carrinho = ObtemCarrinhoNaSession();
-        //        LicencaDAO licDao = new LicencaDAO();
-        //        var modelLicenca = licDao.Consulta(idLicenca);
-        //        var carrinhoModel = carrinho.FirstOrDefault(c => c.LicencaId == idLicenca);
 
-        //        if (carrinhoModel == null)
-        //        {
-        //            carrinhoModel = new CarrinhoViewModel
-        //            {
-        //                LicencaId = idLicenca,
-        //                NomeLicenca = modelLicenca.NomeLicenca,
-        //                Quantidade = 0
-        //            };
-        //        }
-
-        //        return View(carrinhoModel);
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
-
-        //private List<CarrinhoViewModel> ObtemCarrinhoNaSession()
-        //{
-        //    var carrinho = new List<CarrinhoViewModel>();
-        //    string carrinhoJson = HttpContext.Session.GetString("carrinho");
-
-        //    if (!string.IsNullOrEmpty(carrinhoJson))
-        //    {
-        //        carrinho = JsonConvert.DeserializeObject<List<CarrinhoViewModel>>(carrinhoJson);
-        //    }
-
-        //    return carrinho;
-        //}
-
-        //public IActionResult AdicionarCarrinho(int LicencaId, int Quantidade)
-        //{
-        //    try
-        //    {
-        //        var carrinho = ObtemCarrinhoNaSession();
-        //        var carrinhoModel = carrinho.FirstOrDefault(c => c.LicencaId == LicencaId);
-
-        //        if (carrinhoModel != null && Quantidade == 0)
-        //        {
-        //            // Remove do carrinho
-        //            carrinho.Remove(carrinhoModel);
-        //        }
-        //        else if (carrinhoModel == null && Quantidade > 0)
-        //        {
-        //            // Adiciona ao carrinho
-        //            LicencaDAO licDao = new LicencaDAO();
-        //            var modelLicenca = licDao.Consulta(LicencaId);
-        //            carrinhoModel = new CarrinhoViewModel
-        //            {
-        //                LicencaId = LicencaId,
-        //                NomeLicenca = modelLicenca.NomeLicenca
-        //            };
-        //            carrinho.Add(carrinhoModel);
-        //        }
-
-        //        if (carrinhoModel != null)
-        //        {
-        //            carrinhoModel.Quantidade = Quantidade;
-        //        }
-
-        //        string carrinhoJson = JsonConvert.SerializeObject(carrinho);
-        //        HttpContext.Session.SetString("carrinho", carrinhoJson);
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
-
-        //public IActionResult Visualizar()
-        //{
-        //    try
-        //    {
-        //        LicencaDAO dao = new LicencaDAO();
-        //        var carrinho = ObtemCarrinhoNaSession();
-
-        //        foreach (var item in carrinho)
-        //        {
-        //            var lic = dao.Consulta(item.LicencaId);
-        //            // Adicione outras propriedades necessárias da licença ao item
-        //            item.NomeLicenca = lic.NomeLicenca;
-        //        }
-
-        //        return View(carrinho);
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
-
-        //public override void OnActionExecuting(ActionExecutingContext context)
-        //{
-        //    if (!HelperControllers.VerificaUserLogado(HttpContext.Session))
-        //    {
-        //        context.Result = RedirectToAction("Index", "Login");
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Logado = true;
-        //        base.OnActionExecuting(context);
-        //    }
-        //}
+        public IActionResult EfetuarPedido()
+        {
+            try
+            {
+                using (var transacao = new System.Transactions.TransactionScope())
+                {
+                    PedidoViewModel pedido = new PedidoViewModel();
+                    pedido.DataPedido = DateTime.Now;
+                    PedidoDAO pedidoDAO = new PedidoDAO();
+                    int idPedido = pedidoDAO.Insert(pedido);
+                    PedidoItemDAO itemDAO = new PedidoItemDAO();
+                    var carrinho = ObtemCarrinhoNaSession();
+                    foreach (var elemento in carrinho)
+                    {
+                        PedidoItemViewModel item = new PedidoItemViewModel();
+                        item.IdPedido = idPedido;
+                        item.IdLicenca = elemento.LicencaId;
+                        item.Quantidade = elemento.Quantidade;
+                        itemDAO.Insert(item);
+                    }
+                    transacao.Complete();
+                }
+                HelperControllers.LimparCarrinho(HttpContext.Session);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel(erro.ToString()));
+            }
+        }
     }
 }
