@@ -25,9 +25,9 @@ namespace EcommerceLicenca.DAO
             FornecedorViewModel i = new FornecedorViewModel()
             {
                 Id = Convert.ToInt32(registro["Id"]),
-                Nome = registro["ChaveAtivacao"].ToString(),
-                Cnpj = registro["ChaveAtivacao"].ToString(),
-                Email = registro["ChaveAtivacao"].ToString()
+                Nome = registro["Nome"].ToString(),
+                Cnpj = registro["Cnpj"].ToString(),
+                Email = registro["Email"].ToString()
                 
             };
 
@@ -37,7 +37,6 @@ namespace EcommerceLicenca.DAO
         protected override void SetTabela()
         {
             Tabela = "Fornecedor";
-            NomeSpListagem = "spListagemFornecedor";
         }
     }
 }

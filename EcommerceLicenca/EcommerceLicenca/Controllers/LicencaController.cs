@@ -21,13 +21,13 @@ namespace EcommerceLicenca.Controllers
         {
             base.ValidaDados(model, operacao);
             if (string.IsNullOrEmpty(model.NomeLicenca))
-                ModelState.AddModelError("Nome", "Preencha o nome da licença.");
+                ModelState.AddModelError("NomeLicenca", "Preencha o nome da licença.");
 
             if (string.IsNullOrEmpty(model.RequisitosSistema))
-                ModelState.AddModelError("Nome", "Preencha os requisitos do sistema.");
+                ModelState.AddModelError("RequisitosSistema", "Preencha os requisitos do sistema.");
 
             if (model.Valor <= 0)
-                ModelState.AddModelError("Nome", "Preencha o valor da licença.");
+                ModelState.AddModelError("Valor", "Preencha o valor da licença.");
 
         }
     }
