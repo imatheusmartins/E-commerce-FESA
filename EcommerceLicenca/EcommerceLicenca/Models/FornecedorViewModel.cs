@@ -5,7 +5,7 @@ namespace EcommerceLicenca.Models
 {
     public class FornecedorViewModel : PadraoViewModel
     {
-        public string NomeFornecedor { get; set; } // Para armazenar o nome do fornecedor
+        public string Nome { get; set; } // Para armazenar o nome do fornecedor
         public string Cnpj { get; set; }
 		public string Email { get; set; }
 		

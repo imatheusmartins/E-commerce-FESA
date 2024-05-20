@@ -35,7 +35,7 @@ namespace EcommerceLicenca.DAO
 
         protected override void SetTabela()
         {
-            Tabela = "licenca";
+            Tabela = "Licenca";
         }
     }
 }

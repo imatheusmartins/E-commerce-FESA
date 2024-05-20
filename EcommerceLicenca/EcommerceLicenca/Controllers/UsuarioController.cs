@@ -3,57 +3,57 @@ using EcommerceLicenca.DAO;
 using EcommerceLicenca.Models;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EcommerceLicenca.Controllers
 {
     public class UsuarioController : Controller
     {
-        public IActionResult Index()
-        {
-            UsuarioDAO dao = new UsuarioDAO();
-            List<UsuarioViewModel> lista = dao.Listagem();
-            return View(lista);
-        }
+        //public UsuarioController()
+        //{
+        //    DAO = new UsuarioDAO();
+        //    GeraProximoId = true;
+        //}
 
-        public IActionResult Create()
-        {
-            UsuarioViewModel Usuario = new UsuarioViewModel();
-            Usuario.DataNascimento = DateTime.Now;
-            return View("Form", Usuario);
-        }
 
-        public IActionResult Salvar(UsuarioViewModel Usuario)
-        {
-            try
-            {
-                UsuarioDAO dao = new UsuarioDAO();
-                if (dao.Consulta(Usuario.Id) == null)
-                    dao.Inserir(Usuario);
-                else
-                    dao.Alterar(Usuario);
-                return RedirectToAction("index");
-            }
-            catch (Exception erro)
-            {
-                return View("Error", new ErrorViewModel(erro.ToString()));
-            }
-        }
-        public IActionResult Edit(int id)
-        {
-            try
-            {
-                UsuarioDAO dao = new UsuarioDAO();
-                UsuarioViewModel Usuario = dao.Consulta(id);
-                if (Usuario == null)
-                    return RedirectToAction("index");
-                else
-                    return View("Form", Usuario);
-            }
-            catch (Exception erro)
-            {
-                return View("Error", new ErrorViewModel(erro.ToString()));
-            }
-        }
+        //protected override void ValidaDados(AlunoViewModel model, string operacao)
+        //{
+        //    base.ValidaDados(model, operacao);
+
+        //    if (string.IsNullOrEmpty(model.Nome))
+        //        ModelState.AddModelError("Nome", "Preencha o nome.");
+        //    if (model.Mensalidade < 0)
+        //        ModelState.AddModelError("Mensalidade", "Campo obrigatório.");
+        //    if (model.CidadeId <= 0)
+        //        ModelState.AddModelError("CidadeId", "Informe o código da cidade.");
+        //    if (model.DataNascimento > DateTime.Now)
+        //        ModelState.AddModelError("DataNascimento", "Data inválida!");
+
+        //}
+
+
+        //protected override void PreencheDadosParaView(string Operacao, AlunoViewModel model)
+        //{
+        //    base.PreencheDadosParaView(Operacao, model);
+        //    if (Operacao == "I")
+        //        model.DataNascimento = DateTime.Now;
+
+        //    PreparaListaCidadesParaCombo();
+        //}
+
+        //private void PreparaListaCidadesParaCombo()
+        //{
+        //    CidadeDAO cidadeDao = new CidadeDAO();
+        //    var cidades = cidadeDao.Listagem();
+        //    List<SelectListItem> listaCidades = new List<SelectListItem>();
+        //    listaCidades.Add(new SelectListItem("Selecione uma cidade...", "0"));
+        //    foreach (var cidade in cidades)
+        //    {
+        //        SelectListItem item = new SelectListItem(cidade.Nome, cidade.Id.ToString());
+        //        listaCidades.Add(item);
+        //    }
+        //    ViewBag.Cidades = listaCidades;
+        //}
 
     }
 }

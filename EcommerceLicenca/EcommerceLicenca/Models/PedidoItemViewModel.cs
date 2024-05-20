@@ -2,9 +2,9 @@
 {
     public class PedidoItemViewModel : PadraoViewModel
     {
-        public int PedidoId { get; set; }
-        public int LicencaId { get; set; }
-        public double ValorItemPedido { get; set; }
+        public int IdPedido { get; set; }
+        public int IdLicenca { get; set; }
+        public int Quantidade { get; set; }
 
     }
 }
