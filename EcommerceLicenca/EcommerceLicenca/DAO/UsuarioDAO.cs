@@ -42,7 +42,6 @@ namespace EcommerceLicenca.DAO
         protected override void SetTabela()
         {
             Tabela = "Usuario";
-            NomeSpListagem = "spListagem_Usuario";
         }
     }
 }
