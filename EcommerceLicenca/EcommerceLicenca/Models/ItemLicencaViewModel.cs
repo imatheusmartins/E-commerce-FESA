@@ -5,6 +5,5 @@
         public int IdLicenca { get; set; }
         public int FornecedorId { get; set; }  
         public string ChaveAtivacao { get; set; }
-        public double ValorItemLicenca { get; set;}
     }
 }
