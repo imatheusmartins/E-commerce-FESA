@@ -15,8 +15,8 @@ namespace EcommerceLicenca.DAO
                  new SqlParameter("Id", model.Id),
                  new SqlParameter("Nome", model.NomeLicenca),
                  new SqlParameter("RequisitosSistema", model.RequisitosSistema),
-                 new SqlParameter("Valor", model.Valor),
-                 new SqlParameter("ImagemEmBase64", model.Valor)
+                 new SqlParameter("Valor", model.Valor)
+                 //new SqlParameter("ImagemEmBase64", model.Valor)
                  };
             return parametros;
         }

@@ -3,113 +3,39 @@ using EcommerceLicenca.DAO;
 using EcommerceLicenca.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace EcommerceLicenca.Controllers
 {
-    public class FornecedorController : Controller
+    public class FornecedorController : PadraoController<FornecedorViewModel>
     {
-        //public IActionResult Index()
-        //{
-        //    try
-        //    {
-        //        FornecedorDAO dao = new FornecedorDAO();
-        //        List<FornecedorViewModel> lista = dao.Listagem();
-        //        return View(lista);
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
+        public FornecedorController()
+        {
+            DAO = new FornecedorDAO();
+            GeraProximoId = true;
+        }
 
-        //public IActionResult Create()
-        //{
-        //    FornecedorViewModel fornecedor = new FornecedorViewModel();
-        //    return View("Form", fornecedor);
-        //}
 
-        //public IActionResult Salvar(FornecedorViewModel fornecedor)
-        //{
-        //    try
-        //    {
-        //        FornecedorDAO dao = new FornecedorDAO();
-        //        if (dao.Consulta(fornecedor.Id) == null)
-        //            dao.Inserir(fornecedor);
-        //        else
-        //            dao.Alterar(fornecedor);
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
+        protected override void ValidaDados(FornecedorViewModel model, string operacao)
+        {
+            base.ValidaDados(model, operacao);
 
-        //public IActionResult Edit(int id)
-        //{
-        //    try
-        //    {
-        //        FornecedorDAO dao = new FornecedorDAO();
-        //        FornecedorViewModel fornecedor = dao.Consulta(id);
-        //        if (fornecedor == null)
-        //            return RedirectToAction("Index");
-        //        else
-        //            return View("Form", fornecedor);
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
+            if (string.IsNullOrEmpty(model.Nome))
+                ModelState.AddModelError("Nome", "Preencha o nome do fornecedor.");
 
-        //public IActionResult Delete(int id)
-        //{
-        //    try
-        //    {
-        //        FornecedorDAO dao = new FornecedorDAO();
-        //        dao.Excluir(id);
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
+            if (string.IsNullOrEmpty(model.Cnpj) || !Regex.IsMatch(model.Cnpj, @"^\d{14}$"))
+                ModelState.AddModelError("Cnpj", "Preencha um CNPJ válido com 14 dígitos.");
 
-        //public IActionResult Detalhes(int id)
-        //{
-        //    try
-        //    {
-        //        FornecedorDAO dao = new FornecedorDAO();
-        //        FornecedorViewModel fornecedor = dao.Consulta(id);
-        //        if (fornecedor == null)
-        //            return RedirectToAction("Index");
-        //        else
-        //            return View(fornecedor);
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
+            if (string.IsNullOrEmpty(model.Email) || !new EmailAddressAttribute().IsValid(model.Email))
+                ModelState.AddModelError("Email", "Preencha um e-mail válido.");
+        }
 
-        //public IActionResult Licencas(int id)
-        //{
-        //    try
-        //    {
-        //        FornecedorDAO dao = new FornecedorDAO();
-        //        var fornecedor = dao.Consulta(id);
-        //        if (fornecedor == null)
-        //            return RedirectToAction("Index");
 
-        //        var licencas = dao.GetLicencas(id);
-        //        ViewBag.Fornecedor = fornecedor.NomeFornecedor;
-        //        return View(licencas);
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        return View("Error", new ErrorViewModel { Message = erro.ToString() });
-        //    }
-        //}
+        protected override void PreencheDadosParaView(string Operacao, FornecedorViewModel model)
+        {
+            base.PreencheDadosParaView(Operacao, model);
+
+        }
     }
 }

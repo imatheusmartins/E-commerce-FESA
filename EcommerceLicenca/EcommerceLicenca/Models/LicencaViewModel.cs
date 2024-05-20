@@ -10,6 +10,6 @@ namespace EcommerceLicenca.Models
         public string NomeLicenca { get; set; }
         public double Valor { get; set; }
         public string RequisitosSistema { get; set; } // Requisitos mínimos do sistema para o software
-        public string ImagemEmBase64 { get; set; }
+        //public string ImagemEmBase64 { get; set; }
     }
 }

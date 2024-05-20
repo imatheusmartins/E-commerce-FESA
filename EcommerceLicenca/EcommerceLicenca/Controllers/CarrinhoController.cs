@@ -105,7 +105,7 @@ namespace EcommerceLicenca.Controllers
                 foreach (var item in carrinho)
                 {
                     var lic = dao.Consulta(item.LicencaId);
-                    item.ImagemEmBase64 = lic.ImagemEmBase64;
+                   // item.ImagemEmBase64 = lic.ImagemEmBase64;
                 }
                 return View(carrinho);
             }
