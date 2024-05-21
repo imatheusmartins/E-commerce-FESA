@@ -6,17 +6,17 @@ using System.Reflection;
 
 namespace EcommerceLicenca.Controllers
 {
-    public class LoginController : PadraoController<UsuarioViewModel>
+    public class LoginController : Controller
     {
         public IActionResult Index()
         {
             return View();
 
         }
-        public IActionResult FazLogin(UsuarioViewModel usuario)
+        public IActionResult FazLogin(string email, string senha)
         {
             UsuarioDAO DAO = new UsuarioDAO();
-            if (DAO.Consulta(usuario.Id) != null)
+            if (DAO.ConsultaLogin(email, senha) != null)
             {
                 HttpContext.Session.SetString("Logado", "true");
                 return RedirectToAction("index", "Home");
@@ -32,17 +32,6 @@ namespace EcommerceLicenca.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index");
-        }
-
-        protected virtual void ValidaDados(T model, string operacao)
-        {
-            ModelState.Clear();
-            if (operacao == "I" && DAO.Consulta(model.Id) != null)
-                ModelState.AddModelError("Id", "Código já está em uso!");
-            if (operacao == "A" && DAO.Consulta(model.Id) == null)
-                ModelState.AddModelError("Id", "Este registro não existe!");
-            if (model.Id <= 0)
-                ModelState.AddModelError("Id", "Id inválido!");
         }
     }
 }

@@ -39,14 +39,14 @@ namespace EcommerceLicenca.DAO
             return u;
         }
 
-        public virtual T ConsultaLogin(int id)
+        public UsuarioViewModel ConsultaLogin(string email, string senha)
         {
             var p = new SqlParameter[]
             {
-                new SqlParameter("id", id),
-                new SqlParameter("tabela", Tabela)
+                new SqlParameter("Email", email),
+                new SqlParameter("Senha", senha)
             };
-            var tabela = HelperDAO.ExecutaProcSelect("spConsulta", p);
+            var tabela = HelperDAO.ExecutaProcSelect("spLogin", p);
             if (tabela.Rows.Count == 0)
                 return null;
             else

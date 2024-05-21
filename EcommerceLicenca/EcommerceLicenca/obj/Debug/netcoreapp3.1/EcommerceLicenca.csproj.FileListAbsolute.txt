@@ -727,3 +727,12 @@ Z:\2024\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.
 Z:\2024\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\EcommerceLicenca.genruntimeconfig.cache
 Z:\2024\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Fornecedor\Form.cshtml.g.cs
 Z:\2024\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Fornecedor\Index.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Fornecedor\Form.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Fornecedor\Index.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Licenca\Form.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Licenca\Index.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Index.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Carrinho\Detalhes.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Carrinho\Index.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Carrinho\Visualizar.cshtml.g.cs

@@ -1,0 +1,25 @@
+﻿@model CarrinhoViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Escolha a quantidade de licenças</h2>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AdicionarCarrinho">
+            <input asp-for="LicencaId" hidden />
+            
+            <strong>Licença : @Model.LicencaId - @Model.NomeLicenca</strong>
+            <br />
+            <br />
+            Quantidade:
+            <input asp-for="Quantidade" />
+            <br />
+            <br />
+            <input type="submit" value="Adicionar ao carrinho" class="btn btn-primary" />
+            <br />
+            <span class="text-danger">@ViewBag.Erro</span>
+        </form>
+    </div>
+</div>
