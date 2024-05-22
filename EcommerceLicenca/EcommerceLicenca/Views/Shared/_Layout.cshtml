@@ -37,7 +37,18 @@
                         <span>&nbsp; &nbsp; &nbsp;</span>
                         <li><a asp-area="" asp-controller="Carrinho" asp-action="Index">Compra de licencas</a></li>
                             <span>&nbsp; &nbsp; &nbsp;</span>
+
                             <li><a asp-area="" asp-controller="Login" asp-action="LogOff">Logoff</a></li>
+
+                        <li><a asp-area="" asp-controller="Login" asp-action="LogOff">Logoff</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="ExibeConsultaAvancadaPedidos">
+                                Consulta
+                                Avançada de Pedidos
+                            </a>
+                        </li>
+                        @* Adicionar as guias restantes aqui *@
+
                         }
                         else
                         {
