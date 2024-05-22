@@ -8,13 +8,15 @@
     <div class="col-lg-3">
         <form action="/login/Fazlogin" method="post">            
             <label for="email" class="control-label">Usuário</label>
-            <input type="text"  value="admin" name="email" class="form-control" required placeholder='Email...' />
+            <input type="text" name="email" class="form-control" required placeholder='Email...' />
             <label for="senha" class="control-label">Senha</label>
-            <input type="password" name="senha" value="admin" class="form-control" required placeholder='Senha...' />
+            <input type="password" name="senha" class="form-control" required placeholder='Senha...' />
             <br />
             <input type="submit" value="Login" class="btn btn-success" />
             <br />
             <span class="text-danger"> @ViewBag.Erro</span>
         </form>
+        <br />
+        <a href="/Usuario/Create" class="btn btn-success">Cadastre-se</a>
     </div>
 </div>

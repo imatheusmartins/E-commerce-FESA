@@ -736,3 +736,4 @@ D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreap
 D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Carrinho\Detalhes.cshtml.g.cs
 D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Carrinho\Index.cshtml.g.cs
 D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Carrinho\Visualizar.cshtml.g.cs
+D:\MATHEUS\E-commerce-FESA\EcommerceLicenca\EcommerceLicenca\obj\Debug\netcoreapp3.1\Razor\Views\Sobre\Index.cshtml.g.cs
