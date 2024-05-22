@@ -36,7 +36,24 @@ namespace EcommerceLicenca.DAO
         protected override void SetTabela()
         {
             Tabela = "ItemPedido";
-            NomeSpListagem = "spListagem_ItemPedido";
+        }
+
+        public List<PedidoItemViewModel> ConsultaAvancadaPedidos(string nome,
+                                 int codigoPedido,
+                                 DateTime dataInicial,
+                                 DateTime dataFinal)
+        {
+            SqlParameter[] p = {
+                         new SqlParameter("nome", nome),
+                         new SqlParameter("IdPedido", codigoPedido),
+                         new SqlParameter("dataInicial", dataInicial),
+                         new SqlParameter("dataFinal", dataFinal),
+                         };
+            var tabela = HelperDAO.ExecutaProcSelect("spConsultaAvancadaPedidos", p);
+            var lista = new List<PedidoItemViewModel>();
+            foreach (DataRow dr in tabela.Rows)
+                lista.Add(MontaModel(dr));
+            return lista;
         }
     }
 }

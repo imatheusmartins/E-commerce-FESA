@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<fieldset id="areaFiltro" class="form-group">
+    <legend>Consulta de Pedidos por Usuário</legend>
+    <div class="row">
+        <div class="col-lg-4">
+            Nome do usuário<br />
+            <input type="text" id="NomeUsuario" class="form-control" />
+        </div>
+        <div class="col-lg-3">
+            Código do Pedido <br />
+            <input type="text" id="CodigoPedido" class="form-control" />
+        </div>
+        <div class="col-lg-2">
+            Período <br />
+            <input type="date" id="dataInicial" class="form-control" />
+        </div>
+        <div class="col-lg-2">
+            <br />
+            <input type="date" id="dataFinal" class="form-control" />
+        </div>
+        <div class="col-lg-1">
+            <br />
+            <input type="button" id="btnFiltro" class="btn btn-success" value="Aplicar"
+                   onclick="aplicaFiltroConsultaAvancadaPedidos()" />
+        </div>
+    </div>
+</fieldset>
+<div id="resultadoConsulta" class="table-responsive">
+</div>

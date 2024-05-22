@@ -1,0 +1,18 @@
+﻿@model List<PedidoItemViewModel>
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Id do Pedido</th>
+        <th>Id da Licença</th>
+        <th>Quantidade</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.IdPedido</td>
+            <td>@item.IdLicenca</td>
+            <td>@item.Quantidade</td>
+        </tr>
+    }
+</table>
