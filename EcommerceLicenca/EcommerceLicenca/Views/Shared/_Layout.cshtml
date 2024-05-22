@@ -20,7 +20,14 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
 
-                         @if (ViewBag.Logado == true)
+                         @if (ViewBag.Cliente == true)
+                        {
+                        <li><a asp-area="" asp-controller="Carrinho" asp-action="Index">Compra de licencas</a></li>
+                            <span>&nbsp; &nbsp; &nbsp;</span>
+                            <li><a asp-area="" asp-controller="Login" asp-action="LogOff">Logoff</a></li>
+                            @* Adicionar as guias restantes aqui *@
+                        }
+                        else if (ViewBag.Administrador == true)
                         {
                         <li><a asp-area="" asp-controller="Usuario" asp-action="Index">Usuários</a></li>
                         <span>&nbsp; &nbsp; &nbsp;</span>
@@ -31,7 +38,6 @@
                         <li><a asp-area="" asp-controller="Carrinho" asp-action="Index">Compra de licencas</a></li>
                             <span>&nbsp; &nbsp; &nbsp;</span>
                             <li><a asp-area="" asp-controller="Login" asp-action="LogOff">Logoff</a></li>
-                        @* Adicionar as guias restantes aqui *@
                         }
                         else
                         {

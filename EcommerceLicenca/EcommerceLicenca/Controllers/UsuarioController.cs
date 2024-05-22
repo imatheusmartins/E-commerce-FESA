@@ -26,7 +26,7 @@ namespace EcommerceLicenca.Controllers
                 ModelState.AddModelError("NomeUsuario", "Preencha o nome de usuário.");
 
             if (string.IsNullOrEmpty(model.PerfilUsuario))
-                ModelState.AddModelError("PerfilUsuario", "Preencha o perfil do usuário.");
+                ModelState.AddModelError("PerfilUsuario", "O perfil do usuário deve ser preenchido.");
 
             if (string.IsNullOrEmpty(model.Cpf) || !Regex.IsMatch(model.Cpf, @"^\d{11}$"))
                 ModelState.AddModelError("Cpf", "Preencha um CPF válido com 11 dígitos.");
@@ -39,6 +39,9 @@ namespace EcommerceLicenca.Controllers
 
             if (string.IsNullOrEmpty(model.Senha))
                 ModelState.AddModelError("Senha", "Preencha a senha.");
+
+            if (model.NivelAcesso < 0 || model.NivelAcesso > 1)
+                ModelState.AddModelError("NivelAcesso", "O nível de acesso do usuário deve ser 0 ou 1.");
         }
 
 

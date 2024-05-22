@@ -31,23 +31,23 @@ namespace EcommerceLicenca.Controllers
             }
         }
 
-        public IActionResult Detalhes(int idLicenca)
+        public IActionResult Detalhes(int LicencaId)
         {
             try
             {
                 List<CarrinhoViewModel> carrinho = ObtemCarrinhoNaSession();
                 LicencaDAO licDao = new LicencaDAO();
-                var modelLicenca = licDao.Consulta(idLicenca);
-                CarrinhoViewModel carrinhoModel = carrinho.Find(c => c.LicencaId == idLicenca);
+                var modelLicenca = licDao.Consulta(LicencaId);
+                CarrinhoViewModel carrinhoModel = carrinho.Find(c => c.LicencaId == LicencaId);
                 if (carrinhoModel == null)
                 {
                     carrinhoModel = new CarrinhoViewModel();
-                    carrinhoModel.LicencaId = idLicenca;
+                    carrinhoModel.LicencaId = LicencaId;
                     carrinhoModel.NomeLicenca = modelLicenca.NomeLicenca;
                     carrinhoModel.Quantidade = 0;
                 }
-                // preenche a imagem
-                //carrinhoModel.ImagemEmBase64 = modelCidade.ImagemEmBase64;
+                
+                carrinhoModel.ImagemEmBase64 = modelLicenca.ImagemEmBase64;
                 return View(carrinhoModel);
             }
             catch (Exception erro)
@@ -78,10 +78,10 @@ namespace EcommerceLicenca.Controllers
                 {
                     //não havia no carrinho, vamos adicionar
                     LicencaDAO LicencaDao = new LicencaDAO();
-                    var modelCidade = LicencaDao.Consulta(LicencaId);
+                    var modelLicenca = LicencaDao.Consulta(LicencaId);
                     carrinhoModel = new CarrinhoViewModel();
                     carrinhoModel.LicencaId = LicencaId;
-                    carrinhoModel.NomeLicenca = modelCidade.NomeLicenca;
+                    carrinhoModel.NomeLicenca = modelLicenca.NomeLicenca;
                     carrinho.Add(carrinhoModel);
                 }
                 if (carrinhoModel != null)
@@ -105,7 +105,7 @@ namespace EcommerceLicenca.Controllers
                 foreach (var item in carrinho)
                 {
                     var lic = dao.Consulta(item.LicencaId);
-                   // item.ImagemEmBase64 = lic.ImagemEmBase64;
+                    item.ImagemEmBase64 = lic.ImagemEmBase64;
                 }
                 return View(carrinho);
             }
@@ -117,10 +117,18 @@ namespace EcommerceLicenca.Controllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (!HelperControllers.VerificaUserLogado(HttpContext.Session))
-                context.Result = RedirectToAction("Index", "Login");
+            {
+                if(!HelperControllers.VerificaAdminLogado(HttpContext.Session))
+                    context.Result = RedirectToAction("Index", "Login");
+                else
+                {
+                    ViewBag.Administrador = true;
+                    base.OnActionExecuting(context);
+                }
+            }
             else
             {
-                ViewBag.Logado = true;
+                ViewBag.Cliente = true;
                 base.OnActionExecuting(context);
             }
         }

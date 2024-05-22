@@ -7,7 +7,16 @@ namespace EcommerceLicenca.Controllers
     {
         public static Boolean VerificaUserLogado(ISession session)
         {
-            string logado = session.GetString("Logado");
+            string logado = session.GetString("Cliente");
+            if (logado == null)
+                return false;
+            else
+                return true;
+        }
+
+        public static Boolean VerificaAdminLogado(ISession session)
+        {
+            string logado = session.GetString("Administrador");
             if (logado == null)
                 return false;
             else

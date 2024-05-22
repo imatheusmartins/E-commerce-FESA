@@ -1,4 +1,7 @@
 ﻿@model List<UsuarioViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <a href="/usuario/Create" class="btn btn-success">Novo usuário</a>
 <br />
@@ -7,6 +10,7 @@
     <tr>
         <th>Ações</th>
         <th>Id</th>
+        <th>Nível de Acesso</th>
         <th>Perfil do usuário</th>
         <th>CPF</th>
         <th>Data de nascimento</th>
@@ -21,6 +25,7 @@
                 <a href="javascript:apagarUsuario(@c.Id)">💣</a>
             </td>
             <td>@c.Id</td>
+            <td>@c.NivelAcesso</td>
             <td>@c.PerfilUsuario</td>
             <td>@c.Cpf</td>
             <td>@c.DataNascimento</td>

@@ -9,8 +9,10 @@
     <div class="col-md-4">
         <form asp-action="AdicionarCarrinho">
             <input asp-for="LicencaId" hidden />
-            
-            <strong>Licença : @Model.LicencaId - @Model.NomeLicenca</strong>
+            <img id="imgPreview" src="data:image/jpeg;base64,@Model.ImagemEmBase64"
+                 class="img-responsive" width="200">
+            <br />            
+            <strong>Licenca : @Model.LicencaId - @Model.NomeLicenca</strong>
             <br />
             <br />
             Quantidade:

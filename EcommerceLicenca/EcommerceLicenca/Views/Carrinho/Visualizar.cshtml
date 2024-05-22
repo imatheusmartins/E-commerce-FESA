@@ -8,6 +8,7 @@
     <tr>
         <th>Ação</th>
         <th>Nomelicenca</th>
+        <th>Imagem</th>
         <th>Quantidade</th>
     </tr>
     @foreach (var item in Model)
@@ -17,6 +18,10 @@
                 <a href="/Carrinho/Detalhes/?LicencaId=@item.LicencaId"> Alterar </a>
             </td>
             <td>@item.LicencaId - @item.NomeLicenca</td>
+            <td>
+                <img id="imgPreview" src="data:image/jpeg;base64,@item.ImagemEmBase64"
+                 class="img-responsive" width="50">
+            </td>
             <td>@item.Quantidade</td>
         </tr>
     }

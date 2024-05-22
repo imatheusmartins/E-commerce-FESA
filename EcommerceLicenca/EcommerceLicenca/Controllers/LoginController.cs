@@ -16,9 +16,16 @@ namespace EcommerceLicenca.Controllers
         public IActionResult FazLogin(string email, string senha)
         {
             UsuarioDAO DAO = new UsuarioDAO();
-            if (DAO.ConsultaLogin(email, senha) != null)
+            UsuarioViewModel user = DAO.ConsultaLogin(email, senha);
+
+            if (user != null && user.NivelAcesso == 0)
             {
-                HttpContext.Session.SetString("Logado", "true");
+                HttpContext.Session.SetString("Cliente", "true");
+                return RedirectToAction("index", "Home");
+            }
+            else if(user != null && user.NivelAcesso == 1)
+            {
+                HttpContext.Session.SetString("Administrador", "true");
                 return RedirectToAction("index", "Home");
             }
             else

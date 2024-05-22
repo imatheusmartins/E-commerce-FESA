@@ -35,6 +35,14 @@
     <span asp-validation-for="Valor" class="text-danger"></span>
 
     <br />
+    <input type="file" name="Imagem" id="Imagem" onchange="exibirImagem()" class="btn btn-secondary">
+    <img id="imgPreview" src="data:image/jpeg;base64,@Model.ImagemEmBase64" class="img-responsive"
+         width="200">
+    <span asp-validation-for="Imagem" class="text-danger"></span>
+
+    <br />
+    
+    <br />
     <input type="submit" value="Salvar dados" class="btn btn-info" />
     <br />
 </form>

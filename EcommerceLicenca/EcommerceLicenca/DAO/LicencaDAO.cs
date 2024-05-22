@@ -10,13 +10,16 @@ namespace EcommerceLicenca.DAO
     {
         protected override SqlParameter[] CriaParametros(LicencaViewModel model)
         {
+            object imgByte = model.ImagemEmByte;
+            if (imgByte == null)
+                imgByte = DBNull.Value;
             SqlParameter[] parametros =
             {
                  new SqlParameter("Id", model.Id),
                  new SqlParameter("Nome", model.NomeLicenca),
                  new SqlParameter("RequisitosSistema", model.RequisitosSistema),
-                 new SqlParameter("Valor", model.Valor)
-                 //new SqlParameter("ImagemEmBase64", model.Valor)
+                 new SqlParameter("Valor", model.Valor),
+                 new SqlParameter("imagem", imgByte)
                  };
             return parametros;
         }
@@ -31,6 +34,8 @@ namespace EcommerceLicenca.DAO
                 Valor = Convert.ToInt32(registro["Valor"])
             };
 
+            if (registro["imagem"] != DBNull.Value)
+                l.ImagemEmByte = registro["imagem"] as byte[];
             return l;
         }
 

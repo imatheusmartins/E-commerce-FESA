@@ -15,7 +15,6 @@ namespace EcommerceLicenca.DAO
                  new SqlParameter("Id", model.Id),
                  new SqlParameter("IdUsuario", model.IdUsuario),
                  new SqlParameter("ValorPedido", model.ValorPedido),
-                 new SqlParameter("StatusPedido", model.StatusPedido),
                  new SqlParameter("DataPedido", model.DataPedido)
             };
             return parametros;
@@ -28,7 +27,6 @@ namespace EcommerceLicenca.DAO
                 Id = Convert.ToInt32(registro["Id"]),
                 IdUsuario = Convert.ToInt32(registro["IdUsuario"]),
                 ValorPedido = Convert.ToDouble(registro["ValorPedido"]),
-                StatusPedido = registro["ValorItemPedido"].ToString(),
                 DataPedido = Convert.ToDateTime(registro["DataPedido"])
             };
 

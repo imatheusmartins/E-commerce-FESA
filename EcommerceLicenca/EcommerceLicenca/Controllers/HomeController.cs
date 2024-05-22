@@ -21,7 +21,8 @@ namespace EcommerceLicenca.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Logado = HelperControllers.VerificaUserLogado(HttpContext.Session);
+            ViewBag.Cliente = HelperControllers.VerificaUserLogado(HttpContext.Session);
+            ViewBag.Administrador = HelperControllers.VerificaAdminLogado(HttpContext.Session);
             return View();
         }
 

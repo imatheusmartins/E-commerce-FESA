@@ -1,4 +1,7 @@
 ﻿@model List<LicencaViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <a href="/licenca/Create" class="btn btn-success">Nova licença</a>
 <br />
@@ -10,6 +13,7 @@
         <th>Nome da licença</th>
         <th>Requisitos do sistema</th>
         <th>Valor</th>
+        <th>Foto</th>
     </tr>
 
     @foreach (var c in Model)
@@ -23,6 +27,10 @@
             <td>@c.NomeLicenca</td>
             <td>@c.RequisitosSistema</td>
             <td>@c.Valor</td>
+            <td>
+                <img id="imgPreview" src="data:image/jpeg;base64,@c.ImagemEmBase64" class="img-responsive"
+                 width="50">
+            </td>
         </tr>
     }
 </table>

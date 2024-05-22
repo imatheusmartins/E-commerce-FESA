@@ -13,12 +13,13 @@ namespace EcommerceLicenca.DAO
             SqlParameter[] parametros =
             {
                  new SqlParameter("Id", model.Id),
-                 new SqlParameter("Nome", model.NomeUsuario),
+                 new SqlParameter("NomeUsuario", model.NomeUsuario),
                  new SqlParameter("Cpf", model.Cpf),
                  new SqlParameter("DataNascimento", model.DataNascimento),
                  new SqlParameter("Email", model.Email),
                  new SqlParameter("PerfilUsuario", model.PerfilUsuario),
-                 new SqlParameter("Senha", model.Senha)
+                 new SqlParameter("Senha", model.Senha),
+                 new SqlParameter("NivelAcesso", model.NivelAcesso)
             };
             return parametros;
         }
@@ -33,7 +34,8 @@ namespace EcommerceLicenca.DAO
                 DataNascimento = Convert.ToDateTime(registro["DataNascimento"]),
                 Email = registro["Email"].ToString(),
                 PerfilUsuario = registro["PerfilUsuario"].ToString(),
-                Senha = registro["Senha"].ToString()
+                Senha = registro["Senha"].ToString(),
+                NivelAcesso = Convert.ToInt32(registro["NivelAcesso"])
             };
 
             return u;
